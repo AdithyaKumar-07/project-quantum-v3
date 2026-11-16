@@ -153,18 +153,6 @@ The project records a 10-epoch training history for the Residual 2D U-Net. The s
 
 **Important:** training loss and validation Dice are different metrics. A plot that places them on one vertical axis is a visual summary only; their numerical magnitudes must not be compared directly. The held-out test results above—not the training curve—are the primary evidence for final model performance.
 
-## Random Forest resolution study
-
-The project contains held-out reports for RF at 16×16, 32×32, and native 240×240 resolution. Insert the final comparison figure generated from the saved calibrated test reports.
-
-| Resolution |              Held-out Macro Dice |               Held-out Macro IoU |                Active Macro Dice |                 Active Macro IoU |
-| ---------- | -------------------------------: | -------------------------------: | -------------------------------: | -------------------------------: |
-| 16×16     | *Insert verified report value* | *Insert verified report value* | *Insert verified report value* | *Insert verified report value* |
-| 32×32     | *Insert verified report value* | *Insert verified report value* | *Insert verified report value* | *Insert verified report value* |
-| 240×240   | *Insert verified report value* | *Insert verified report value* | *Insert verified report value* | *Insert verified report value* |
-
-Populate this table from `outputs/reports/msd_test_calibrated_summary_16.csv`, `msd_test_calibrated_summary_32.csv`, and `msd_test_calibrated_summary_240.csv`. Do not copy values from demo reports or validation reports into this held-out test table.
-
 ## FRQI and NEQR reconstruction study
 
 FRQI and NEQR are evaluated as quantum image representation/reconstruction approaches. Their comparison should report reconstruction and resource metrics separately from segmentation metrics.
