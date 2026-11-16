@@ -1,0 +1,22 @@
+{
+  "figures": [
+    "outputs\\figures\\msd_test_method_comparison_16.png",
+    "outputs\\figures\\msd_test_slice_dispersion_16.png",
+    "outputs\\figures\\msd_test_method_comparison_32.png",
+    "outputs\\figures\\msd_test_slice_dispersion_32.png",
+    "outputs\\figures\\msd_test_method_comparison_240.png",
+    "outputs\\figures\\msd_test_slice_dispersion_240.png",
+    "outputs\\figures\\BRATS_224_frqi_16_noisy_comparison.png",
+    "outputs\\figures\\BRATS_224_neqr_16_noisy_comparison.png",
+    "outputs\\figures\\BRATS_002_frqi_16_noisy_comparison.png",
+    "outputs\\figures\\BRATS_002_neqr_16_noisy_comparison.png",
+    "outputs\\figures\\BRATS_043_frqi_16_noisy_comparison.png",
+    "outputs\\figures\\BRATS_043_neqr_16_noisy_comparison.png",
+    "outputs\\figures\\BRATS_123_frqi_16_noisy_comparison.png",
+    "outputs\\figures\\BRATS_123_neqr_16_noisy_comparison.png",
+    "outputs\\figures\\BRATS_018_frqi_16_noisy_comparison.png",
+    "outputs\\figures\\BRATS_018_neqr_16_noisy_comparison.png"
+  ],
+  "count": 16,
+  "source_note": "All figures are generated from current outputs/reports. Synthetic demo reports are not read."
+}

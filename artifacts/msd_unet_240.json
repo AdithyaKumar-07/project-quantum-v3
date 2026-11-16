@@ -1,0 +1,49 @@
+{
+  "dataset": "Medical Segmentation Decathlon Task01_BrainTumour",
+  "source_lineage": "BraTS 2016/2017-derived; not BraTS 2021",
+  "model_family": "residual 2D U-Net",
+  "task": "native-resolution 2D axial segmentation",
+  "label_ids": [
+    0,
+    1,
+    2,
+    4
+  ],
+  "regions": {
+    "WT": [
+      1,
+      2,
+      4
+    ],
+    "TC": [
+      1,
+      4
+    ],
+    "ET": [
+      4
+    ]
+  },
+  "best_epoch": 10,
+  "best_validation_active_macro_dice": 0.7390523007347549,
+  "patient_split": {
+    "train": 338,
+    "validation": 72,
+    "test": 74
+  },
+  "patient_split_sha256": "7fd5d546124efc2884462b5cbc99fbb1e86358ae490d2670137e867d4ccb5809",
+  "split_seed": 42,
+  "training_config": {
+    "data": "D:\\Projects\\CAPSTONE\\QIP\\PROJECT_QUANTUM_V3_SUBMISSION\\data\\raw\\Task01_BrainTumour",
+    "epochs": 10,
+    "batch_size": 2,
+    "slices_per_patient": 2,
+    "base_channels": 8,
+    "learning_rate": 0.001,
+    "patience": 3,
+    "seed": 42,
+    "device": "cuda",
+    "new_split": false,
+    "rebuild_cache": false,
+    "cache_dir": "D:\\Projects\\CAPSTONE\\QIP\\PROJECT_QUANTUM_V3_SUBMISSION\\data\\processed\\unet_cache"
+  }
+}

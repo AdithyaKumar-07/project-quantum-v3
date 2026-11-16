@@ -1,0 +1,4 @@
+# Optional quantum-only dependency subset.
+# The complete requirements.txt already includes these same exact versions.
+qiskit==2.6.1
+qiskit-aer==0.18.2

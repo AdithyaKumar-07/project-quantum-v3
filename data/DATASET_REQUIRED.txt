@@ -1,0 +1,5 @@
+﻿Place the separately obtained Medical Segmentation Decathlon Task01_BrainTumour dataset here:
+data/raw/Task01_BrainTumour/
+
+Expected contents: dataset.json, imagesTr/, labelsTr/, imagesTs/.
+The raw medical dataset is intentionally excluded from this publication package.

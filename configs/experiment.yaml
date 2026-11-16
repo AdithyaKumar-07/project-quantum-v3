@@ -1,0 +1,46 @@
+project:
+  name: PROJECT_QUANTUM_V3
+  version: 3.1.0
+  random_state: 42
+  input_modalities: [FLAIR, T1, T1ce, T2]
+  resolutions: [16, 32]
+  internal_labels: [0, 1, 2, 4]
+  regions:
+    WT: [1, 2, 4]
+    TC: [1, 4]
+    ET: [4]
+dataset:
+  name: Medical Segmentation Decathlon Task01_BrainTumour
+  lineage: BraTS 2016/2017-derived; not BraTS 2021
+  root: data/raw/Task01_BrainTumour
+  labelled_split: imagesTr + labelsTr
+  unlabelled_test_split: imagesTs
+training:
+  model: RandomForestClassifier
+  n_estimators: 120
+  max_depth: 18
+  samples_per_class_per_slice: 250
+  max_slices_per_patient: 8
+  patient_split:
+    train: 0.70
+    validation: 0.15
+    test: 0.15
+  first_run_max_patients: 120
+classical_baselines:
+  methods: [otsu, kmeans, watershed, random_forest]
+quantum:
+  simulator: qiskit_aer
+  ideal_method: statevector
+  noisy_method: statevector
+  resolutions: [16, 32]
+  one_qubit_depolarizing_probability: 0.001
+  two_qubit_depolarizing_probability: 0.01
+  readout_error_probability: 0.01
+  default_shots: 50000
+  device: CPU
+  note: Aer GPU support is not assumed on native Windows; actual devices are reported at runtime.
+application:
+  api_host: 127.0.0.1
+  api_port: 8000
+  frontend: streamlit
+  database: db/project_quantum.sqlite3

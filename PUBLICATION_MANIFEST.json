@@ -1,0 +1,17 @@
+﻿{
+    "manifest_schema":  "project-quantum-publication-v1",
+    "project":  "Project Quantum V3.4",
+    "created":  "2026-11-16T18:48:20",
+    "source_validation":  "pip check, pytest, release preflight and API import passed",
+    "included_file_count":  1,
+    "excluded_file_count":  59689,
+    "runtime_markdown_retained_count":  1,
+    "options":  {
+                    "include_local_database":  false,
+                    "include_processed_cache":  false,
+                    "include_raw_dataset":  false
+                },
+    "file_inventory":  "docs/FILE_INVENTORY.csv",
+    "excluded_path_details_omitted":  true,
+    "note":  "Detailed included-file inventory is available separately. Machine-specific paths and exhaustive excluded-file listings are omitted."
+}

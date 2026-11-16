@@ -1,0 +1,4 @@
+# Optional dependency for the native-resolution residual 2D U-Net.
+# Keep the existing Random Forest + Qiskit environment unchanged when you only
+# need the original quantum/classical project. Install this extra for U-Net.
+torch>=2.3,<3

@@ -1,0 +1,329 @@
+﻿
+# ============================================================
+# PROJECT QUANTUM V3.4 — GITIGNORE
+# ============================================================
+
+# ------------------------------------------------------------
+# 1. PYTHON ENVIRONMENTS
+# ------------------------------------------------------------
+
+.venv/
+venv/
+env/
+ENV/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Python build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+wheels/
+
+# ------------------------------------------------------------
+# 2. TESTING, COVERAGE AND TYPE CHECKING
+# ------------------------------------------------------------
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pytype/
+.hypothesis/
+.tox/
+.nox/
+
+.coverage
+.coverage.*
+htmlcov/
+
+# ------------------------------------------------------------
+# 3. JUPYTER
+# ------------------------------------------------------------
+
+.ipynb_checkpoints/
+.profile/
+jupyter_runtime/
+
+# Keep actual research notebooks.
+# Do not ignore *.ipynb.
+
+# ------------------------------------------------------------
+# 4. ENVIRONMENT VARIABLES AND SECRETS
+# ------------------------------------------------------------
+
+.env
+.env.*
+!.env.example
+
+# Private keys and credentials
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+credentials/
+
+# ------------------------------------------------------------
+# 5. MEDICAL DATASET
+# ------------------------------------------------------------
+
+# Original MSD dataset — download separately.
+data/raw/Task01_BrainTumour/
+
+# Rebuildable preprocessing/cache files.
+data/processed/
+
+# Keep data/demo/ synthetic demonstration fixtures.
+
+# ------------------------------------------------------------
+# 6. LOCAL DATABASE
+# ------------------------------------------------------------
+
+db/*.sqlite
+db/*.sqlite3
+db/*.db
+db/*.sqlite-*
+db/*.sqlite3-*
+db/*.db-*
+
+# Keep db/.gitkeep.
+
+# ------------------------------------------------------------
+# 7. GENERATED APPLICATION AND EXPERIMENT OUTPUTS
+# ------------------------------------------------------------
+
+outputs/logs/
+outputs/tmp/
+outputs/cache/
+
+# Unverified intermediate comparison figures.
+outputs/final_comparison/
+outputs/final_comparison_complete/
+
+# Preserve validated outputs/figures/ and outputs/reports/.
+# Do not ignore all CSV, JSON, PNG or NPZ files globally.
+
+# ------------------------------------------------------------
+# 8. MODEL ARTIFACTS
+# ------------------------------------------------------------
+
+# IMPORTANT:
+# Do not ignore artifacts/*.joblib or *.pt.
+# These are important project models and are tracked by Git LFS.
+#
+# Git LFS patterns are configured in .gitattributes.
+
+# Temporary training checkpoints only.
+*_backup_*.pt
+*smoke*.pt
+*_temporary_*.pt
+*_temp_*.pt
+
+# ------------------------------------------------------------
+# 9. GENERATED INVENTORY DOCUMENTS
+# ------------------------------------------------------------
+
+# Duplicate/local machine inventory documentation.
+docs/PROJECT_INVENTORY_METADATA.json
+docs/PROJECT_DIRECTORY_GUIDE.md
+
+# Keep curated docs/01 through docs/05 and docs/images/.
+
+# ------------------------------------------------------------
+# 10. FACULTY DISTRIBUTION ARCHIVE
+# ------------------------------------------------------------
+
+/PROJECT_QUANTUM_V3_SUBMISSION_FACULTY_GITHUB.zip
+
+# ------------------------------------------------------------
+# 11. TEMPORARY FILES AND BACKUPS
+# ------------------------------------------------------------
+
+*.tmp
+*.temp
+*.bak
+*.old
+*.orig
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# ------------------------------------------------------------
+# 12. WINDOWS / MACOS / EDITOR
+# ------------------------------------------------------------
+
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+.vscode/
+.idea/
+*.code-workspace
+
+# ------------------------------------------------------------
+# 13. NODE / FRONTEND BUILD OUTPUTS
+# ------------------------------------------------------------
+
+node_modules/
+.npm/
+.parcel-cache/
+.next/
+.nuxt/
+coverage/
+
+# ------------------------------------------------------------
+# 14. LOCAL TOOLING
+# ------------------------------------------------------------
+
+.cache/
+.temp/
+.tmp/
+```
+
+A few deliberate choices:
+
+- I have **not** ignored `.joblib`, `.pt`, `.json`, `.csv`, `.png`, `.npz` or notebooks globally.
+- Your trained models remain available through Git LFS.
+- The two incomplete comparison directories remain on your computer but won't be included in the initial repository.
+- Your final curated figures can be retained in `outputs/figures/`.
+- Your experimental reports remain available for reproducibility.
+
+GitHub currently warns for ordinary Git files above 50 MiB and blocks files above 100 MiB. Git LFS is the correct approach for your large model artifacts. GitHub Free currently provides 10 GiB of LFS storage and bandwidth, with a 2 GiB individual LFS-file limit. <Cite refs={["turn510062search0","turn510062search5","turn510062search3"]}/>
+
+---
+
+# 3. Apply the `.gitignore`
+
+Paste this into PowerShell to save the contents from the code block above:
+
+```powershell
+notepad .gitignore
+```
+
+Replace everything, save and close.
+
+Then check the important rules:
+
+```powershell
+git check-ignore -v .venv/
+git check-ignore -v .pytest_cache/
+git check-ignore -v data/processed/unet_cache/manifest.json
+git check-ignore -v db/project_quantum.sqlite3
+git check-ignore -v data/raw/Task01_BrainTumour/dataset.json
+git check-ignore -v PROJECT_QUANTUM_V3_SUBMISSION_FACULTY_GITHUB.zip
+```
+
+Then verify that the models are still tracked by Git LFS:
+
+```powershell
+git check-attr filter -- artifacts/msd_rf_16.joblib
+git check-attr filter -- artifacts/msd_rf_32.joblib
+git check-attr filter -- artifacts/msd_rf_240.joblib
+git check-attr filter -- artifacts/msd_unet_240.pt
+
+Get-Content .gitattributes
+```
+
+Expected attribute:
+
+```text
+filter: lfs
+```
+
+# 4. Check the repository before staging
+
+Run:
+
+```powershell
+git status --short
+```
+
+And inspect all ignored and untracked items:
+
+```powershell
+git status --short --ignored
+```
+
+Also check for large experimental files:
+
+```powershell
+Get-ChildItem . -File -Recurse -Force |
+    Where-Object {
+        $_.Length -gt 50MB -and
+        $_.FullName -notmatch '[\\/](\.git|\.venv|venv|data[\\/]raw)[\\/]'
+    } |
+    Select-Object FullName, @{
+        Name = "Size_MB"
+        Expression = { [math]::Round($_.Length / 1MB, 2) }
+    } |
+    Sort-Object Size_MB -Descending |
+    Format-Table -AutoSize
+```
+
+The large model files should be LFS-tracked. The faculty ZIP should be ignored.
+
+---
+
+# 5. The intended GitHub repository structure
+
+<box border radius="lg" padding={3} gap={1}>
+  <row align="center" gap={2}>
+    <icon name="github" size="xl"/>
+    **PROJECT_QUANTUM_V3_SUBMISSION**
+  </row>
+  <text color="secondary" size="xs">Proposed public repository structure</text>
+  <divider color="subtle"/>
+  <text color="success" weight="medium">README.md</text>
+  <text color="secondary" size="xs">Repository landing page with research results and screenshots</text>
+  <text>├── app/</text>
+  <text>├── artifacts/</text>
+  <text>│   └── *.joblib, *.pt (Git LFS)</text>
+  <text>├── configs/</text>
+  <text>├── data/</text>
+  <text>│   ├── demo/</text>
+  <text>│   └── DATASET_REQUIRED.txt</text>
+  <text>├── db/</text>
+  <text>├── docs/</text>
+  <text>│   ├── images/</text>
+  <text>│   └── 01–05 documentation</text>
+  <text>├── notebooks/</text>
+  <text>│   └── 01–06 research workflow</text>
+  <text>├── outputs/</text>
+  <text>│   ├── figures/</text>
+  <text>│   └── reports/</text>
+  <text>├── scripts/</text>
+  <text>├── src/</text>
+  <text>├── tests/</text>
+  <text>├── .gitattributes</text>
+  <text>├── .gitignore</text>
+  <text>├── LICENSE</text>
+  <text>└── requirements*.txt</text>
+</box>
+
+# 6. Let's prepare the repository
+
+One important status update: your local Git repository was already initialized on `main`, and LFS was configured. We are continuing that repository, not creating a second one.
+
+Because you've declined the GitHub connection, we'll use the standard Git CLI and GitHub website instead.
+
+Before staging anything, send me these three outputs:
+
+1. `git status --short`
+2. `Get-Content .gitattributes`
+3. The size inventory of `outputs/reports/quantum/*.npz`
+
+I'll check for accidental dataset inclusion, oversized non-LFS files and unfinished generated results.
+
+Then we'll make the first clean commit and connect it to a new empty GitHub repository.
+
+**My target is a repository that someone can clone, install, understand, reproduce and inspect—not just a folder dumped onto GitHub.**

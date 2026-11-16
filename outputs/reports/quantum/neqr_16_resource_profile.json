@@ -1,0 +1,16 @@
+{
+  "representation": "NEQR",
+  "n_qubits": 16,
+  "statevector_dimension": 65536,
+  "nonzero_amplitudes": 256,
+  "logical_depth": 1,
+  "logical_ops": {
+    "initialize": 1
+  },
+  "transpilation_performed": true,
+  "cost_model_note": "Initialize is a high-level exact state-preparation instruction; it is not free QRAM. Transpiled gate counts are reported only when transpilation completes.",
+  "transpiled_depth": 1,
+  "transpiled_ops": {
+    "initialize": 1
+  }
+}
